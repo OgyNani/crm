@@ -1,4 +1,4 @@
-{% extends "layout.twig" %}
+{% extends "login-layout.twig" %}
 {% block body %}
 <div class="login-box">
     <div class="login-logo">
@@ -41,6 +41,7 @@
                     </div>
 
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <input type="hidden" name="_target_path" value="/user/list">
 
                     <!-- /.col -->
                     <div class="col-4">
