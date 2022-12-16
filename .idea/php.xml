@@ -130,6 +130,23 @@
       <path value="$PROJECT_DIR$/vendor/symfony/flex" />
       <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/behat/gherkin" />
+      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/vendor/codeception/codeception" />
+      <path value="$PROJECT_DIR$/vendor/codeception/lib-asserts" />
+      <path value="$PROJECT_DIR$/vendor/codeception/lib-web" />
+      <path value="$PROJECT_DIR$/vendor/codeception/lib-innerbrowser" />
+      <path value="$PROJECT_DIR$/vendor/codeception/stub" />
+      <path value="$PROJECT_DIR$/vendor/codeception/module-phpbrowser" />
+      <path value="$PROJECT_DIR$/vendor/codeception/module-symfony" />
+      <path value="$PROJECT_DIR$/vendor/codeception/module-asserts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">
