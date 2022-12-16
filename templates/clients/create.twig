@@ -1,0 +1,43 @@
+{% extends "layout.twig" %}
+{% block body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Users. Create</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <form action="/client/add" method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Client name</label>
+                        <input name="userName" type="text" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Client contact</label>
+                        <input name="contact" type="text" class="form-control" placeholder="Contact">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1"> Client country</label>
+                        <input name="country" type="text" class="form-control" placeholder="Country">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+{% endblock %}

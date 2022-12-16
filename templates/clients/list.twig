@@ -8,7 +8,7 @@
                     <h1>Users</h1>
                 </div>
                 <div class="col-sm-6 clearfix">
-                    <a href="/user/create" class="btn btn-block btn-default">Create user</a>
+                    <a href="/client/create" class="btn btn-block btn-default">Create client</a>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -24,23 +24,31 @@
                     <thead>
                     <tr>
                         <th class="col-1">#</th>
-                        <th class="col-8">Name</th>
-                        <th class="col-3">Actions</th>
+                        <th class="col-3">Name</th>
+                        <th class="col-2">Contact</th>
+                        <th class="col-2">Country</th>
+                        <th class="col-2">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for user in users %}
+                    {% for client in clients %}
                         <tr>
-                            <td class="pl-4">{{ user.id }}</td>
+                            <td class="pl-4">{{ client.id }}</td>
                             <td>
-                                <h5 class="font-medium mb-0">{{ user.userName }}</h5>
+                                <h5 class="font-medium mb-0">{{ client.userName }}</h5>
+                            </td>
+                            <td>
+                                <h5 class="font-medium mb-0">{{ client.contact }}</h5>
+                            </td>
+                            <td>
+                                <h5 class="font-medium mb-0">{{ client.country }}</h5>
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-default" href="/user/{{ user.id }}/edit">
+                                    <a class="btn btn-default" href="/client/{{ client.id }}/edit">
                                         <i class="fa fa-edit" ></i> Edit
                                     </a>
-                                    <a class="btn btn-default" href="/user/{{ user.id }}/delete">
+                                    <a class="btn btn-default" href="/client/{{ client.id }}/delete">
                                         <i class="fas fa-trash"></i> Remove
                                     </a>
                                 </div>

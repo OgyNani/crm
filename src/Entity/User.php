@@ -81,4 +81,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function update(string $userName): void
+    {
+        $this->username = $userName;
+    }
+
+    public function updatePassword(string $password): void
+    {
+        $this->password = $password;
+    }
 }

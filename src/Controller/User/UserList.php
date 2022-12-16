@@ -20,7 +20,6 @@ class UserList extends AbstractController
     public function do(): Response
     {
         $users = $this->userRepository->findAll();
-
-        return $this->render('user/list.twig');
+        return $this->render('user/list.twig', ['users' => $users]);
     }
 }

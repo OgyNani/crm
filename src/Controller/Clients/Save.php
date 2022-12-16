@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Controller\Clients;
+
+use App\Repository\ClientRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
+
+class Save extends AbstractController
+{
+    private ClientRepository $clientRepository;
+
+    public function __construct(ClientRepository $clientRepository)
+    {
+        $this->clientRepository = $clientRepository;
+    }
+
+    #[Route('/client/{id}/save', name: 'client-save', methods: ['POST'])]
+    public function do(int $id, Request $request): Response
+    {
+        $clients = $this->clientRepository->find($id);
+
+        if ($clients === null) {
+            throw new NotFoundHttpException("Client #$id not found");
+        }
+
+        $clients->update(
+            $request->request->get('userName'),
+            $request->request->get('contact'),
+            $request->request->get('country')
+        );
+        $this->clientRepository->save($clients);
+
+        return $this->redirect('/clients/list');
+    }
+}
