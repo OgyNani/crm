@@ -151,6 +151,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/module-phpbrowser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/module-symfony" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/module-asserts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/codeception/module-doctrine2" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
