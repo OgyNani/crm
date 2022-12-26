@@ -24,8 +24,11 @@ class Client
     #[ORM\Column(length: 255, unique: true)]
     private ?string $contact = null;
 
-    public function __construct(string $username, string $country, string $contact)
-    {
+    public function __construct(
+        string $username,
+        string $country,
+        string $contact
+    ) {
         $this->username = $username;
         $this->country = $country;
         $this->contact = $contact;

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Add extends AbstractController
 {
-    private  UserRepository $userRepository;
+    private UserRepository $userRepository;
     private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher)

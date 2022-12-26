@@ -34,6 +34,6 @@ class Save extends AbstractController
         );
         $this->clientRepository->save($clients);
 
-        return $this->redirect('/clients/list');
+        return $this->redirect("/client/{$id}/profile");
     }
 }

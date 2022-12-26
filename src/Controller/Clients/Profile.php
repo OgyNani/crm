@@ -3,29 +3,35 @@
 namespace App\Controller\Clients;
 
 use App\Repository\ClientRepository;
+use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Edit extends AbstractController
+class Profile extends AbstractController
 {
     private ClientRepository $clientRepository;
+    private OrderRepository $orderRepository;
 
-    public function __construct(ClientRepository $clientRepository)
+    public function __construct(ClientRepository $clientRepository, OrderRepository $orderRepository)
     {
         $this->clientRepository = $clientRepository;
+        $this->orderRepository = $orderRepository;
     }
 
-    #[Route('/client/{id}/edit', name: 'client-edit')]
+    #[Route('/client/{id}/profile', name: 'client-profile')]
     public function do(int $id): Response
     {
         $client = $this->clientRepository->find($id);
+        $orders = $this->orderRepository->findAll();
 
         if ($client === null) {
             throw new NotFoundHttpException("client #$id not found");
+        } elseif ($orders === null) {
+            throw new NotFoundHttpException("orders #$id not found");
         }
 
-        return $this->render('clients/edit.twig', ['client' => $client]);
+        return $this->render('clients/profile.twig', ['client' => $client, 'orders' => $orders]);
     }
 }
