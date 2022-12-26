@@ -24,7 +24,7 @@ class Profile extends AbstractController
     public function do(int $id): Response
     {
         $client = $this->clientRepository->find($id);
-        $orders = $this->orderRepository->findAll();
+        $orders = $this->orderRepository->findByClient($id);
 
         if ($client === null) {
             throw new NotFoundHttpException("client #$id not found");

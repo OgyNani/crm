@@ -38,4 +38,15 @@ class OrderRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findByClient(int $clientId): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.clientId = :clientId')
+            ->setParameter('clientId', $clientId)
+            ->orderBy('o.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
