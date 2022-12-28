@@ -3,6 +3,7 @@
 namespace App\Controller\Clients;
 
 use App\Repository\ClientRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +17,7 @@ class ClientsList extends AbstractController
         $this->clientRepository = $clientRepository;
     }
 
+    #[IsPermissionGranted(resource: 'clients', access: 'view')]
     #[Route('/clients/list', name: 'clients-list')]
     public function do(): Response
     {

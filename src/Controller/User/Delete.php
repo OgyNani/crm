@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Repository\UserRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +18,7 @@ class Delete extends AbstractController
         $this->userRepository = $userRepository;
     }
 
+    #[IsPermissionGranted(resource: 'users', access: 'manage')]
     #[Route('/user/{id}/delete', name:'user-delete')]
     public function do(int $id): Response
     {

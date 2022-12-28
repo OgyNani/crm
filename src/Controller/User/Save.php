@@ -4,6 +4,7 @@ namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class Save extends AbstractController
 {
-    private  UserRepository $userRepository;
+    private UserRepository $userRepository;
     private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher)
@@ -22,6 +23,7 @@ class Save extends AbstractController
         $this->passwordHasher = $passwordHasher;
     }
 
+    #[IsPermissionGranted(resource: 'users', access: 'manage')]
     #[Route('/user/{id}/save', name: 'user-save', methods: ['POST'])]
     public function do(int $id, Request $request): Response
     {
@@ -31,7 +33,10 @@ class Save extends AbstractController
             throw new NotFoundHttpException("User #$id not found");
         }
 
-        $user->update($request->request->get('userName'));
+        $user->update(
+            $request->request->get('userName')
+        );
+
 
         if ($request->request->get('password') !== '') {
             $password = $this->passwordHasher->hashPassword(
@@ -42,8 +47,12 @@ class Save extends AbstractController
             $user->updatePassword($password);
         }
 
+        $user->updateRole(
+            $request->request->get('roleId')
+        );
+
         $this->userRepository->save($user);
 
-        return $this->redirect('/user/list');
+        return $this->redirect("/user/{$id}/profile");
     }
 }

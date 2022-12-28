@@ -4,6 +4,7 @@ namespace App\Controller\Orders;
 
 use App\Repository\CountriesRepository;
 use App\Repository\OrderStatusRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,7 @@ class Create extends AbstractController
         $this->orderStatusRepository = $orderStatusRepository;
     }
 
+    #[IsPermissionGranted(resource: 'clients', access: 'manage')]
     #[Route('/client/{clientId}/new-order', name: 'client-new-order')]
     public function do(int $clientId): Response
     {

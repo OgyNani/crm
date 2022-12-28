@@ -4,6 +4,7 @@ namespace App\Controller\Clients;
 
 use App\Entity\Client;
 use App\Repository\ClientRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ class Add extends AbstractController
         $this->clientRepository = $clientRepository;
     }
 
+    #[IsPermissionGranted(resource: 'clients', access: 'manage')]
     #[Route('/client/add', name: 'client-add', methods: ['POST'])]
     public function do(Request $request): Response
     {

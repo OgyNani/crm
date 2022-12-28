@@ -3,6 +3,7 @@
 namespace App\Controller\Clients;
 
 use App\Repository\ClientRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ class Save extends AbstractController
         $this->clientRepository = $clientRepository;
     }
 
+    #[IsPermissionGranted(resource: 'clients', access: 'manage')]
     #[Route('/client/{id}/save', name: 'client-save', methods: ['POST'])]
     public function do(int $id, Request $request): Response
     {

@@ -21,6 +21,7 @@ class Add extends AbstractController
         $this->passwordHasher = $passwordHasher;
     }
 
+    #[IsPermissionGranted(resource: 'users', access: 'manage')]
     #[Route('/user/add', name: 'user-add', methods: ['POST'])]
     public function do(Request $request): Response
     {

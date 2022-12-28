@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Repository\UserRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +17,7 @@ class UserList extends AbstractController
         $this->userRepository = $userRepository;
     }
 
+    #[IsPermissionGranted(resource: 'users', access: 'manage')]
     #[Route('/user/list', name: 'user-list')]
     public function do(): Response
     {

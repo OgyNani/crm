@@ -13,7 +13,7 @@
                 <p class="login-box-msg">Sign in to start your session</p>
             {% endif %}
 
-            <form action="/" method="post">
+            <form action="/login" method="post">
                 <div class="input-group mb-3">
                     <input name="_username" type="text" class="form-control" placeholder="User name" value="{{ lastUsername }}"/>
                     <div class="input-group-append">
@@ -41,7 +41,7 @@
                     </div>
 
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <input type="hidden" name="_target_path" value="/user/list">
+                    <input type="hidden" name="_target_path" value="/clients/list">
 
                     <!-- /.col -->
                     <div class="col-4">

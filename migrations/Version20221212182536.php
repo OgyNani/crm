@@ -23,6 +23,7 @@ final class Version20221212182536 extends AbstractMigration
             id INT AUTO_INCREMENT NOT NULL, 
             username VARCHAR(180) NOT NULL, 
             roles JSON NOT NULL, 
+            role_id INT NOT NULL,
             password VARCHAR(255) NOT NULL, 
             UNIQUE INDEX UNIQ_8D93D649F85E0677 (username), 
             PRIMARY KEY(id)

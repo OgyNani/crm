@@ -1,0 +1,137 @@
+{% extends "layout.twig" %}
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>User Profile</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card card-primary card-outline">
+                        <div class="card-body box-profile">
+                            <h3 class="profile-username text-center">{{ user.userName }}</h3>
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Orders Quantity</b> <a class="float-right">1,322</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Total orders sum</b> <a class="float-right">543</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Total Products Sold</b> <a class="float-right">13,287</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active"
+                                       href="#info"
+                                       data-toggle="tab">Info</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="#edit"
+                                       data-toggle="tab">Edit User</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="info">
+                                    <div class="post">
+                                        <table class="table">
+                                            <tr>
+                                                <th class="col-1">#</th>
+                                                <th class="col-1">Role</th>
+                                            </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="font-medium mb-0">{{ user.id }}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="font-medium mb-0">{{ role.name }}</h5>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p>
+                                                <span class="float-right">
+                                                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="edit">
+                                    <div class="post">
+                                        <table class="table">
+                                            <tbody>
+                                            <form action="/user/{{ user.id }}/save" method="post">
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1"> User name</label>
+                                                        <input name="userName"
+                                                               type="text"
+                                                               class="form-control"
+                                                               value="{{ user.userName }}"
+                                                               placeholder="Username">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1"> User password</label>
+                                                        <input name="password"
+                                                               type="text"
+                                                               class="form-control"
+                                                               value="{{ user.password }}"
+                                                               placeholder="Password">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1"> User role</label>
+                                                        <select name="role"
+                                                                class="form-control select2 select2-hidden-accessible"
+                                                                style="width: 100%;"
+                                                                data-select2-id="1"
+                                                                tabindex="-1"
+                                                                aria-hidden="true">
+                                                            <option value="select">-Please select role-</option>
+                                                            {% for role in roles %}
+                                                                <option value="{{ role.name }}"
+                                                                        {% if user.roleId == role.id %}
+                                                                            {{ "Selected" }}
+                                                                        {% endif %}>
+                                                                    {{ role.name }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
+                                            </tbody>
+                                        </table>
+                                        <p>
+                                                <span class="float-right">
+                                                </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

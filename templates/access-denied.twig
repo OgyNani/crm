@@ -1,0 +1,17 @@
+{% extends "layout.twig" %}
+{% block body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>403 Forbidden</h1>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                Access restricted to {{ resource }}, {{ access }}
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+{% endblock %}

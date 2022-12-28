@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Repository\UserRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,6 +18,7 @@ class Edit extends AbstractController
         $this->userRepository = $userRepository;
     }
 
+    #[IsPermissionGranted(resource: 'users', access: 'manage')]
     #[Route('/user/{id}/edit', name: 'user-edit')]
     public function do(int $id): Response
     {

@@ -5,6 +5,7 @@ namespace App\Controller\Orders;
 use App\Repository\CountriesRepository;
 use App\Repository\OrderRepository;
 use App\Repository\OrderStatusRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class Save extends AbstractController
         $this->orderStatusRepository = $orderStatusRepository;
     }
 
+    #[IsPermissionGranted(resource: 'clients', access: 'manage')]
     #[Route('/order/{id}/save', name: 'order-save', methods: ['POST'])]
     public function do(int $id, Request $request): Response
     {

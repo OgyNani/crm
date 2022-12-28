@@ -3,6 +3,7 @@
 namespace App\Controller\Clients;
 
 use App\Repository\ClientRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +18,7 @@ class Delete extends AbstractController
         $this->clientRepository = $clientRepository;
     }
 
+    #[IsPermissionGranted(resource: 'clients', access: 'manage')]
     #[Route('/client/{id}/delete', name:'client-delete')]
     public function do(int $id): Response
     {
