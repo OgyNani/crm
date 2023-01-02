@@ -21,12 +21,11 @@ class Profile extends AbstractController
     }
 
     #[IsPermissionGranted(resource: 'users', access: 'view')]
-    #[Route('/user/{id}/profile', name: 'user-profile')]
+    #[Route('/user/{id}/profile', name: 'user-profile', requirements: ['id' => '\d+'])]
     public function do(int $id): Response
     {
-
         $user = $this->userRepository->find($id);
-        $role = $this->roleRepository->find($id);
+        $role = $this->roleRepository->find($user->getRoleId());
         $roles = $this->roleRepository->findAll();
         return $this->render('user/profile.twig', ['user' => $user, 'role' => $role, 'roles' => $roles]);
     }

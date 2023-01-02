@@ -6,26 +6,50 @@
                 <h3 class="card-title">Create New Order</h3>
             </div>
             <form action="/order/add" method="post">
-                <input name="clientId"
-                       type="hidden"
-                       value="{{ clientId }}">
                 <div class="card-body">
+
+                    <input name="clientId"
+                           type="hidden"
+                           value="{{ clientId }}">
                     <div class="form-group">
                         <label>Order ID</label>
-                        <input name="orderId"
-                               type="text"
-                               class="form-control"
-                               id="exampleInputEmail1"
-                               placeholder="Order ID">
+                        {% if errors.orderId is defined %}
+                            <input name="orderId"
+                                   type="text"
+                                   class="form-control is-invalid"
+                                   value="{{ errors.orderId.value }}"
+                                   placeholder="Order ID">
+                            <span class="error invalid-feedback">{{ errors.orderId.message }}</span>
+                        {% else %}
+                            <input name="orderId"
+                                   type="text"
+                                   class="form-control"
+                                   id="exampleInputEmail1"
+                                   value="{{ orderId ?? "" }}"
+                                   placeholder="Order ID">
+                        {% endif %}
+
                     </div>
                     <div class="form-group">
                         <label>Products Quantity</label>
-                        <input name="orderProducts"
-                               type="text"
-                               class="form-control"
-                               id="exampleInputEmail1"
-                               placeholder="Products Quantity">
+                        {% if errors.orderProducts is defined %}
+                            <input name="orderProducts"
+                                   type="text"
+                                   class="form-control is-invalid"
+                                   value="{{ errors.orderProducts.value }}"
+                                   placeholder="Products Quantity">
+                            <span class="error invalid-feedback">{{ errors.orderProducts.message }}</span>
+                        {% else %}
+                            <input name="orderProducts"
+                                   type="text"
+                                   class="form-control"
+                                   id="exampleInputEmail1"
+                                   value="{{ products ?? "" }}"
+                                   placeholder="Products Quantity">
+                        {% endif %}
                     </div>
+
+
                     <div class="form-group">
                         <label>Country</label>
                         <select name="country"
@@ -43,11 +67,20 @@
 
                     <div class="form-group">
                         <label>Total Sum</label>
+                        {% if errors.orderSum is defined %}
+                            <input name="orderSum"
+                                   type="text"
+                                   class="form-control is-invalid"
+                                   value="{{ errors.orderSum.value }}"
+                                   placeholder="Order Sum">
+                            <span class="error invalid-feedback">{{ errors.orderSum.message }}</span>
+                        {% else %}
                         <input name="orderSum"
                                type="text"
                                class="form-control"
-                               id="exampleInputEmail1"
+                               value="{{ sum ?? "" }}"
                                placeholder="Order Sum">
+                        {% endif %}
                     </div>
 
                     <div class="form-group">

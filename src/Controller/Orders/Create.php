@@ -30,7 +30,7 @@ class Create extends AbstractController
         $statuses = $this->orderStatusRepository->findAll();
         return $this->render(
             'order/create.twig',
-            ['clientId' => $clientId, 'countries' => $countries, 'statuses' => $statuses]
+            ['clientId' => $clientId, 'countries' => $countries, 'statuses' => $statuses, 'errors' => []]
         );
     }
 }

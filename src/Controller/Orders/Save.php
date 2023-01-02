@@ -7,7 +7,6 @@ use App\Repository\OrderRepository;
 use App\Repository\OrderStatusRepository;
 use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -30,24 +29,46 @@ class Save extends AbstractController
 
     #[IsPermissionGranted(resource: 'clients', access: 'manage')]
     #[Route('/order/{id}/save', name: 'order-save', methods: ['POST'])]
-    public function do(int $id, Request $request): Response
+    public function do(int $id, AddRequest $request): Response
     {
-        $orders = $this->orderRepository->find($id);
+        $order = $this->orderRepository->find($id);
 
-        if ($orders === null) {
+        if ($order === null) {
             throw new NotFoundHttpException("Order #$id not found");
         }
 
-        $orders->update(
-            $request->request->get('orderId'),
-            $request->request->get('orderProducts'),
-            $request->request->get('country'),
-            $request->request->get('orderSum'),
-            $request->request->get('status')
+        $errors = $request->validate();
+        if (!empty($errors)) {
+            dd($errors);
+            $countries = $this->countriesRepository->findAll();
+            $statuses = $this->orderStatusRepository->findAll();
+
+            return $this->render(
+                'order/edit.twig',
+                [
+                    'clientId' => $request->clientId,
+                    'orderId' =>$request->orderId,
+                    'products' => $request->orderProducts,
+                    'country' => $request->country,
+                    'countries' => $countries,
+                    'sum' => $request->orderSum,
+                    'statuses' => $statuses,
+                    'errors' => $errors,
+                    'order' => $order,
+                ]
+            );
+        }
+
+        $order->update(
+            $request->orderId,
+            $request->orderProducts,
+            $request->country,
+            $request->orderSum,
+            $request->status
         );
-        $this->orderRepository->save($orders);
+        $this->orderRepository->save($order);
 
 
-        return $this->redirect("/client/{$orders->getClientId()}/profile");
+        return $this->redirect("/client/{$order->getClientId()}/profile");
     }
 }

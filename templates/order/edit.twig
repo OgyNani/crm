@@ -6,20 +6,46 @@
                 <h3 class="card-title">Edit order</h3>
             </div>
             <form action="/order/{{ order.id }}/save" method="post">
+                <input name="clientId"
+                       type="hidden"
+                       value="{{ order.clientId }}">
                 <div class="card-body">
                     <div class="form-group">
                         <label>Order ID</label>
-                        <input name="orderId"
-                               type="text"
-                               class="form-control"
-                               value="{{ order.orderId }}">
+                        {% if errors.orderId is defined %}
+                            <input name="orderId"
+                                   type="text"
+                                   class="form-control is-invalid"
+                                   value="{{ errors.orderId.value }}"
+                                   placeholder="Order ID">
+                            <span class="error invalid-feedback">{{ errors.orderId.message }}</span>
+                        {% else %}
+                            <input name="orderId"
+                                   type="text"
+                                   class="form-control"
+                                   value="{{ orderId ?? order.orderId }}"
+                                   id="exampleInputEmail1"
+                                   placeholder="Order ID">
+                        {% endif %}
                     </div>
+
                     <div class="form-group">
                         <label>Products Quantity</label>
-                        <input name="orderProducts"
-                               type="text"
-                               class="form-control"
-                               value="{{ order.products }}">
+                        {% if errors.orderProducts is defined %}
+                            <input name="orderProducts"
+                                   type="text"
+                                   class="form-control is-invalid"
+                                   value="{{ errors.orderProducts.value }}"
+                                   placeholder="Products Quantity">
+                            <span class="error invalid-feedback">{{ errors.orderProducts.message }}</span>
+                        {% else %}
+                            <input name="orderProducts"
+                                   type="text"
+                                   class="form-control"
+                                   value="{{ products ?? order.products }}"
+                                   id="exampleInputEmail1"
+                                   placeholder="Products Quantity">
+                        {% endif %}
                     </div>
 
                     <div class="form-group">
@@ -43,10 +69,21 @@
 
                     <div class="form-group">
                         <label>Total Sum</label>
-                        <input name="orderSum"
-                               type="text"
-                               class="form-control"
-                               value="{{ order.sum }}">
+                        {% if errors.orderSum is defined %}
+                            <input name="orderSum"
+                                   type="text"
+                                   class="form-control is-invalid"
+                                   value="{{ errors.orderSum.value }}"
+                                   placeholder="Order Sum">
+                            <span class="error invalid-feedback">{{ errors.orderSum.message }}</span>
+                        {% else %}
+                            <input name="orderSum"
+                                   type="text"
+                                   class="form-control"
+                                   value="{{ sum ?? order.sum }}"
+                                   id="exampleInputEmail1"
+                                   placeholder="Order Sum">
+                        {% endif %}
                     </div>
 
                     <div class="form-group">
