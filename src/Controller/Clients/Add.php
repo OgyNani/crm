@@ -25,7 +25,7 @@ class Add extends AbstractController
     {
         $errors = $request->validate();
         if (!empty($errors)) {
-            return $this->render('clients/create.twig', ['errors' => $errors]);
+            return $this->render('clients/create.twig');
         }
 
         $client = new Client(
