@@ -39,7 +39,6 @@ class Save extends AbstractController
 
         $errors = $request->validate();
         if (!empty($errors)) {
-            dd($errors);
             $countries = $this->countriesRepository->findAll();
             $statuses = $this->orderStatusRepository->findAll();
 
@@ -47,7 +46,7 @@ class Save extends AbstractController
                 'order/edit.twig',
                 [
                     'clientId' => $request->clientId,
-                    'orderId' =>$request->orderId,
+                    'orderId' => $request->orderId,
                     'products' => $request->orderProducts,
                     'country' => $request->country,
                     'countries' => $countries,

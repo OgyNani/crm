@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Users. Create</h1>
+                    <h1>Role. Create</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -16,21 +16,17 @@
 
         <!-- Default box -->
         <div class="card">
-            <form action="/client/add" method="post">
-                <input type="hidden" name="userId" value="{{ app.user.id }}">
+            <form action="/role/add" method="post">
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> Client name</label>
-                        <input name="userName" type="text" class="form-control" placeholder="Username">
+                        <label for="exampleInputEmail1"> Role name</label>
+                        <input name="name" type="text" class="form-control" placeholder="Name">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> Client contact</label>
-                        <input name="contact" type="text" class="form-control" placeholder="Contact">
+                        <label for="exampleInputEmail1"> Role tag</label>
+                        <input name="role" type="text" class="form-control" placeholder="Tag">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1"> Client country</label>
-                        <input name="country" type="text" class="form-control" placeholder="Country">
-                    </div>
+
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>

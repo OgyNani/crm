@@ -15,6 +15,9 @@ class Client
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column]
+    private int $userId;
+
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
@@ -25,10 +28,12 @@ class Client
     private ?string $contact = null;
 
     public function __construct(
+        int $userId,
         string $username,
         string $country,
         string $contact
     ) {
+        $this->userId = $userId;
         $this->username = $username;
         $this->country = $country;
         $this->contact = $contact;
@@ -37,6 +42,11 @@ class Client
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
     }
 
     public function getUsername(): ?string

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Clients;
+namespace App\Controller\Roles;
 
 use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,9 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class Create extends AbstractController
 {
     #[IsPermissionGranted(resource: 'clients', access: 'manage')]
-    #[Route('/client/create', name: 'client-create')]
+    #[Route('/role/create', name: 'role-create')]
     public function do(): Response
     {
-        return $this->render('clients/create.twig');
+        return $this->render('roles/create.twig');
     }
 }

@@ -24,6 +24,7 @@ class Add extends AbstractController
     public function do(Request $request): Response
     {
         $client = new Client(
+            $request->request->get('userId'),
             $request->request->get('userName'),
             $request->request->get('country'),
             $request->request->get('contact'),

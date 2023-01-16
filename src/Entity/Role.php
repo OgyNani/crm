@@ -12,17 +12,23 @@ class Role
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id;
+    private ?int $id;
 
     #[ORM\Column(length: 180, unique: true)]
     private string $name;
 
-    public function __construct(string $name)
-    {
+    #[ORM\Column(length: 180, unique: true)]
+    private string $role;
+
+    public function __construct(
+        string $name,
+        string $role
+    ){
         $this->name = $name;
+        $this->role = $role;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -30,5 +36,18 @@ class Role
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function update(
+        string $name,
+        string $role
+    ): void {
+        $this->name = $name;
+        $this->role = $role;
     }
 }
