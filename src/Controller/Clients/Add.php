@@ -21,13 +21,18 @@ class Add extends AbstractController
 
     #[IsPermissionGranted(resource: 'clients', access: 'manage')]
     #[Route('/client/add', name: 'client-add', methods: ['POST'])]
-    public function do(Request $request): Response
+    public function do(AddRequest $request): Response
     {
+        $errors = $request->validate();
+        if (!empty($errors)) {
+            return $this->render('clients/create.twig', ['errors' => $errors]);
+        }
+
         $client = new Client(
-            $request->request->get('userId'),
-            $request->request->get('userName'),
-            $request->request->get('country'),
-            $request->request->get('contact'),
+            $request->userId,
+            $request->userName,
+            $request->country,
+            $request->contact,
         );
 
         $this->clientRepository->save($client);
