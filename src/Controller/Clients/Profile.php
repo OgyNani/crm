@@ -31,6 +31,9 @@ class Profile extends AbstractController
         $client = $this->clientRepository->find($id);
         $orders = $this->orderRepository->findByClient($id);
         $countries = $this->countriesRepository->findAll();
+        $ordersCount = $this->orderRepository->countOrdersByClient($id);
+        $productsSum = $this->orderRepository->sumProductsByClient($id);
+        $totalSum = $this->orderRepository->sumSoldByClient($id);
 
         if ($client === null) {
             throw new NotFoundHttpException("client #$id not found");
@@ -38,6 +41,13 @@ class Profile extends AbstractController
             throw new NotFoundHttpException("orders #$id not found");
         }
 
-        return $this->render('clients/profile.twig', ['client' => $client, 'orders' => $orders, 'countries' => $countries]);
+        return $this->render('clients/profile.twig', [
+            'client' => $client,
+            'orders' => $orders,
+            'countries' => $countries,
+            'ordersCount' => $ordersCount,
+            'productsSum' => $productsSum,
+            'totalSum' => $totalSum
+        ]);
     }
 }

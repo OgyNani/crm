@@ -49,4 +49,34 @@ class OrderRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function countOrdersByClient(int $clientId)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.clientId = :clientId')
+            ->setParameter('clientId', $clientId)
+            ->select('count(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function sumProductsByClient (int $clientId)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.clientId = :clientId')
+            ->setParameter('clientId', $clientId)
+            ->select('sum(o.products)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function sumSoldByClient (int $clientId)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.clientId = :clientId')
+            ->setParameter('clientId', $clientId)
+            ->select('sum(o.sum)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
