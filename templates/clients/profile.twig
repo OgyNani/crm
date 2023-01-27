@@ -20,13 +20,13 @@
                                 <h3 class="profile-username text-center">{{ client.userName }}</h3>
                                 <ul class="list-group list-group-unbordered mb-3">
                                     <li class="list-group-item">
-                                        <b>Orders Quantity</b> <a class="float-right">1,322</a>
+                                        <b>Orders Quantity</b> <a class="float-right">{{ ordersCount }}</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Total orders sum</b> <a class="float-right">543</a>
+                                        <b>Total Products Sold</b> <a class="float-right"> {{ productsSum }}</a>
                                     </li>
                                     <li class="list-group-item">
-                                        <b>Total Products Sold</b> <a class="float-right">13,287</a>
+                                        <b>Total Sum</b> <a class="float-right"> {{ totalSum }} €</a>
                                     </li>
                                 </ul>
                             </div>
@@ -42,11 +42,11 @@
                             <div class="card-body">
                                 <hr>
                                 <strong><i class="fas fa-map-marker-alt mr-1"></i> Country</strong>
-                                <p class="text-muted">{{ client.contact }}</p>
+                                <p class="text-muted">{{ client.country }}</p>
                                 <hr>
-                                <strong><i class="fas fa-pencil-alt mr-1"></i> Contacts</strong>
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Contact</strong>
                                 <p class="text-muted">
-                                    <span class="tag tag-danger">{{ client.country }}</span>
+                                    <span class="tag tag-danger">{{ client.contact }}</span>
                                 </p>
                             </div>
 
@@ -145,7 +145,7 @@
                                                             <input name="contact"
                                                                    type="text"
                                                                    class="form-control"
-                                                                   value="{{ client.country }}"
+                                                                   value="{{ client.contact }}"
                                                                    placeholder="Contact">
                                                         </div>
                                                         <div class="form-group">
@@ -159,7 +159,7 @@
                                                                 <option value="select">-Please select country-</option>
                                                                 {% for country in countries %}
                                                                     <option value="{{ country.name }}"
-                                                                            {% if client.contact == country.name %}
+                                                                            {% if client.country == country.name %}
                                                                                 {{ "Selected" }}
                                                                             {% endif %}>
                                                                         {{ country.name }}</option>

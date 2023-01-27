@@ -31,8 +31,8 @@ class Save extends AbstractController
 
         $clients->update(
             $request->request->get('userName'),
-            $request->request->get('contact'),
-            $request->request->get('country')
+            $request->request->get('country'),
+            $request->request->get('contact')
         );
         $this->clientRepository->save($clients);
 
