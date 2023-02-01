@@ -17,3 +17,12 @@ $ symfony serve:start
 ```
 $ ./bin/console doctrine:migration:migrate
 ```
+
+## Roadmap
+  
+ - [ ] Create /client/{id}/edit page
+ - [ ] Update ClientEditTest
+ - [ ] Create clientDeleteTest
+ - [ ] Fix UserCreateTest
+ - [ ] user/profile error with field role.name
+ - [ ] fix all tests

@@ -17,8 +17,6 @@ class ClientDeleteTest extends \Codeception\Test\Unit
     // tests
     public function testSomeFeature()
     {
-//        $I->loginAsAdmin();
-
-
+        $this->markTestIncomplete('not implemented');
     }
 }
