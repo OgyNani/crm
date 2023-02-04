@@ -19,11 +19,12 @@ class ClientDeleteTest extends \Codeception\Test\Unit
     // tests
     public function testSomeFeature()
     {
-        // pre conditions
+        $this->tester->loginAsAdmin();
+
         /** @var ClientRepository $clientRepository */
         $clientRepository = $this->tester->grabService(ClientRepository::class);
 
-        $client = new Client('2', 'p1', 'Australia', 'testing@maik.com');
+        $client = new Client(1, 'p1', 'Australia', 'testing@maik.com');
         $clientRepository->save($client);
 
         $this->tester->amOnPage('/clients/list');

@@ -30,9 +30,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    public function __construct(string $username, string $password)
-    {
+    public function __construct(
+        string $username,
+        int $roleId,
+        string $password
+    ) {
         $this->username = $username;
+        $this->roleId = $roleId;
         $this->password = $password;
     }
 
@@ -95,13 +99,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->username = $userName;
     }
 
+    public function updateRole(int $roleId): void
+    {
+        $this->roleId = $roleId;
+    }
+
     public function updatePassword(string $password): void
     {
         $this->password = $password;
     }
 
-    public function updateRole(int $roleId): void
+    public function setPassword(string $password): void
     {
-        $this->roleId = $roleId;
+        $this->password = $password;
     }
 }

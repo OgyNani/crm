@@ -20,9 +20,8 @@ $ ./bin/console doctrine:migration:migrate
 
 ## Roadmap
   
- - [ ] Create /client/{id}/edit page
- - [ ] Update ClientEditTest
- - [ ] Create clientDeleteTest
+ - [x] Create /client/{id}/edit page
+ - [x] Update ClientEditTest
  - [ ] Fix UserCreateTest
- - [ ] user/profile error with field role.name
+ - [x] user/profile error with field role.name
  - [ ] fix all tests

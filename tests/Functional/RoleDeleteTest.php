@@ -19,6 +19,9 @@ class RoleDeleteTest extends \Codeception\Test\Unit
     // tests
     public function testSomeFeature()
     {
+
+        $this->tester->loginAsAdmin();
+
         // pre conditions
         /** @var RoleRepository $roleRepository */
         $roleRepository = $this->tester->grabService(RoleRepository::class);

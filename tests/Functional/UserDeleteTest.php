@@ -19,11 +19,13 @@ class UserDeleteTest extends \Codeception\Test\Unit
     // tests
     public function testUserDeleting()
     {
+        $this->tester->loginAsAdmin();
+
         // pre conditions
         /** @var UserRepository $userRepository */
         $userRepository = $this->tester->grabService(UserRepository::class);
 
-        $user = new User('U1', 'p1');
+        $user = new User('U1', 1, 'p2');
         $userRepository->save($user);
 
         $this->tester->amOnPage('/user/list');

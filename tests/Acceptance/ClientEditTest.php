@@ -13,7 +13,7 @@ class ClientEditTest extends \Codeception\Test\Unit
     {
         $this->tester->loginAsAdmin();
 
-        $this->tester->amOnPage('/client/21/edit');
+        $this->tester->amOnPage('/client/21/profile');
 
         $this->tester->click('#edit');
 

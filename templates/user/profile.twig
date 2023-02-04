@@ -63,7 +63,7 @@
                                                         <h5 class="font-medium mb-0">{{ user.id }}</h5>
                                                     </td>
                                                     <td>
-{#                                                        <h5 class="font-medium mb-0">{{ role.name }}</h5>#}
+                                                      <h5 class="font-medium mb-0">{{ role.name }}</h5>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -89,14 +89,6 @@
                                                                placeholder="Username">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1"> User password</label>
-                                                        <input name="password"
-                                                               type="text"
-                                                               class="form-control"
-                                                               value="{{ user.password }}"
-                                                               placeholder="Password">
-                                                    </div>
-                                                    <div class="form-group">
                                                         <label for="exampleInputEmail1"> User role</label>
                                                         <select name="roleId"
                                                                 class="form-control select2 select2-hidden-accessible"
@@ -113,6 +105,14 @@
                                                                     {{ role.name }}</option>
                                                             {% endfor %}
                                                         </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1"> User password</label>
+                                                        <input name="password"
+                                                               type="text"
+                                                               class="form-control"
+                                                               value="{{ user.password }}"
+                                                               placeholder="Password">
                                                     </div>
                                                 </div>
                                                 <div class="card-footer">

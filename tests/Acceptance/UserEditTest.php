@@ -15,7 +15,7 @@ class UserEditTest extends \Codeception\Test\Unit
     {
         $this->tester->loginAsAdmin();
 
-        $this->tester->amOnPage('/user/15/profile');
+        $this->tester->amOnPage('/user/16/profile');
 
         $this->tester->click('#edit');
 

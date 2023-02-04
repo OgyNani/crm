@@ -37,19 +37,18 @@ class Save extends AbstractController
             $request->request->get('userName')
         );
 
+        $user->updateRole(
+            $request->request->get('roleId')
+        );
 
         if ($request->request->get('password') !== '') {
             $password = $this->passwordHasher->hashPassword(
-                new User('a', 2),
+                new User('a', 2, 2),
                 $request->request->get('password')
             );
 
             $user->updatePassword($password);
         }
-
-        $user->updateRole(
-            $request->request->get('roleId')
-        );
 
         $this->userRepository->save($user);
 

@@ -20,9 +20,7 @@ class OrderCreateTest extends \Codeception\Test\Unit
     public function testSomeFeature()
     {
 
-        $this->tester->see('123123');
-
-        $this->tester->amOnPage();
+        $this->tester->loginAsAdmin();
 
         // pre conditions
         /** @var OrderRepository $orderRepository */

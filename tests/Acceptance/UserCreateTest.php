@@ -19,6 +19,8 @@ class UserCreateTest extends \Codeception\Test\Unit
 
         $this->tester->fillField('userName', "User-" . date("YmdHis"));
 
+        $this->tester->selectOption('roleId', '1');
+
         $this->tester->fillField('password', 'PW' . date('YmdHis'));
 
         $this->tester->click('Submit');
