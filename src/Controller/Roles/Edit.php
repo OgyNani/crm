@@ -2,6 +2,7 @@
 
 namespace App\Controller\Roles;
 
+use App\Repository\PermissionRepository;
 use App\Repository\ResourcesRepository;
 use App\Repository\RoleRepository;
 use App\Security\IsPermissionGranted;
@@ -14,13 +15,16 @@ class Edit extends AbstractController
 {
     private RoleRepository $roleRepository;
     private ResourcesRepository $resourcesRepository;
+    private PermissionRepository $permissionRepository;
 
     public function __construct(
         RoleRepository $roleRepository,
-        ResourcesRepository $resourcesRepository
+        ResourcesRepository $resourcesRepository,
+        PermissionRepository $permissionRepository
     ) {
         $this->roleRepository = $roleRepository;
         $this->resourcesRepository = $resourcesRepository;
+        $this->permissionRepository = $permissionRepository;
     }
 
     #[IsPermissionGranted(resource: 'clients', access: 'manage')]
@@ -35,6 +39,20 @@ class Edit extends AbstractController
 
         $resources = $this->resourcesRepository->findAll();
 
-        return $this->render('roles/edit.twig', ['role' => $role, 'resources' => $resources]);
+        $permissions = $this->permissionRepository->findByRole($id);
+
+        $permissionsData = [];
+        foreach ($permissions as $permission) {
+            $permissionsData[$permission->getResourceId()][$permission->getAccess()] = 1;
+        }
+
+        return $this->render(
+            'roles/edit.twig',
+            [
+                'role' => $role,
+                'resources' => $resources,
+                'permissions' => $permissionsData,
+            ]
+        );
     }
 }

@@ -30,6 +30,12 @@ class PermissionRepository extends ServiceEntityRepository
         }
     }
 
+    public function remove(Permission $permission): void
+    {
+        $this->getEntityManager()->remove($permission);
+        $this->getEntityManager()->flush();
+    }
+
     public function check(int $roleId, int $resourceId, string $access): ?Permission
     {
         return $this->createQueryBuilder('r')
@@ -40,7 +46,15 @@ class PermissionRepository extends ServiceEntityRepository
             ->setParameter('resourceId', $resourceId)
             ->setParameter('access', $access)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * @param int $roleId
+     * @return Permission[]
+     */
+    public function findByRole(int $roleId): array
+    {
+        return $this->findBy(['roleId' => $roleId]);
     }
 }

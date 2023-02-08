@@ -28,7 +28,7 @@ class RolesList extends AbstractController
 
     }
 
-    #[IsPermissionGranted(resource: 'clients', access: 'view')]
+    #[IsPermissionGranted(resource: 'roles', access: 'view')]
     #[Route('/roles/list', name: 'roles-list')]
     public function do(): Response
     {

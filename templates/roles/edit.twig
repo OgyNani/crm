@@ -82,7 +82,11 @@
                                     <div class="row">
                                     {% for access in resource.availableAccess %}
                                         <div class="col-md">
-                                            <input type="checkbox" class="form-check-input" id="chbx_{{ resource.id }}_{{ access }}" onchange="updatePermissionCheckbox({{ role.id }}, {{ resource.id }}, '{{ access }}')"/>
+                                            {% if permissions[resource.id][access] is defined %}
+                                                <input type="checkbox" autocomplete="off" checked value="1" class="form-check-input" id="chbx_{{ resource.id }}_{{ access }}" onchange="updatePermissionCheckbox({{ role.id }}, {{ resource.id }}, '{{ access }}')"/>
+                                            {% else %}
+                                                <input type="checkbox" autocomplete="off" value="0sa" class="form-check-input" id="chbx_{{ resource.id }}_{{ access }}" onchange="updatePermissionCheckbox({{ role.id }}, {{ resource.id }}, '{{ access }}')"/>
+                                            {% endif %}
                                             <label class="form-check-label" for="chbx_{{ resource.id }}_{{ access }}">{{ access }}</label>
                                         </div>
                                     {% endfor %}
