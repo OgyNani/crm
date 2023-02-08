@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Repository\ClientRepository;
+use App\Repository\OrderRepository;
 use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
 use App\Security\IsPermissionGranted;
@@ -15,15 +16,18 @@ class Profile extends AbstractController
     private UserRepository $userRepository;
     private RoleRepository $roleRepository;
     private ClientRepository $clientRepository;
+    private OrderRepository $orderRepository;
 
     public function __construct(
         UserRepository $userRepository,
         RoleRepository $roleRepository,
-        ClientRepository $clientRepository
+        ClientRepository $clientRepository,
+        OrderRepository $orderRepository
     ) {
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
         $this->clientRepository = $clientRepository;
+        $this->orderRepository = $orderRepository;
     }
 
     #[IsPermissionGranted(resource: 'users', access: 'view')]
@@ -33,9 +37,16 @@ class Profile extends AbstractController
         $user = $this->userRepository->find($id);
         $role = $this->roleRepository->find($user->getRoleId());
         $roles = $this->roleRepository->findAll();
+        $clientsData = $this->clientRepository->findByUser($id);
+
         return $this->render(
             'user/profile.twig',
-            ['user' => $user, 'role' => $role, 'roles' => $roles]
+            [
+                'user' => $user,
+                'role' => $role,
+                'roles' => $roles,
+                'clientsData' => $clientsData,
+            ]
         );
     }
 }

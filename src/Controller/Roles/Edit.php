@@ -2,6 +2,7 @@
 
 namespace App\Controller\Roles;
 
+use App\Repository\ResourcesRepository;
 use App\Repository\RoleRepository;
 use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,11 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class Edit extends AbstractController
 {
     private RoleRepository $roleRepository;
+    private ResourcesRepository $resourcesRepository;
 
     public function __construct(
-        RoleRepository $roleRepository
+        RoleRepository $roleRepository,
+        ResourcesRepository $resourcesRepository
     ) {
         $this->roleRepository = $roleRepository;
+        $this->resourcesRepository = $resourcesRepository;
     }
 
     #[IsPermissionGranted(resource: 'clients', access: 'manage')]
@@ -29,6 +33,8 @@ class Edit extends AbstractController
             throw new NotFoundHttpException("Role #$id not found");
         }
 
-        return $this->render('roles/edit.twig', ['role' => $role]);
+        $resources = $this->resourcesRepository->findAll();
+
+        return $this->render('roles/edit.twig', ['role' => $role, 'resources' => $resources]);
     }
 }

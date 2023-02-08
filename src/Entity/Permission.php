@@ -23,9 +23,33 @@ class Permission
     #[ORM\Column()]
     private string $access;
 
+    public function __construct(
+        int $roleId,
+        int $resourceId,
+        string $access
+    ){
+        $this->roleId = $roleId;
+        $this->resourceId = $resourceId;
+        $this->access = $access;
+    }
+
     public function getId(): int
     {
         return $this->id;
     }
 
+    public function getRoleId(): int
+    {
+        return $this->roleId;
+    }
+
+    public function getResourceId(): int
+    {
+        return $this->resourceId;
+    }
+
+    public function getAccess(): string
+    {
+        return $this->access;
+    }
 }

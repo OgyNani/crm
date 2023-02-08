@@ -20,8 +20,5 @@ $ ./bin/console doctrine:migration:migrate
 
 ## Roadmap
   
- - [x] Create /client/{id}/edit page
- - [x] Update ClientEditTest
- - [ ] Fix UserCreateTest
- - [x] user/profile error with field role.name
- - [ ] fix all tests
+ - [ ] add permissions on Role page http://localhost:8000/role/{id}/edit
+ - [ ] add "Create permission" button (http://localhost:8000/role/{id}/create-permission) 

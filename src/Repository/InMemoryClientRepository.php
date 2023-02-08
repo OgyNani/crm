@@ -22,4 +22,14 @@ class InMemoryClientRepository implements ClientRepository
     {
         unset($this->clients[$entity->getUsername()]);
     }
+
+    public function findByUser(int $userId): array
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->orderBy('o.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
