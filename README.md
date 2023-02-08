@@ -20,5 +20,7 @@ $ ./bin/console doctrine:migration:migrate
 
 ## Roadmap
   
- - [ ] add permissions on Role page http://localhost:8000/role/{id}/edit
- - [ ] add "Create permission" button (http://localhost:8000/role/{id}/create-permission) 
+ - [ ] Create client_comments table (id, client_id, user_id, creation_at, text)
+ - [ ] Create order_comments table (id,  order_id,  user_id, created_at, text)
+ - [ ] Create button Comments on client page (/client/{id}/profile)
+ - [ ] Create endpoint /client/{id}/add-comment
