@@ -9,7 +9,6 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Client>
  *
- * @method Client|null find($id, $lockMode = null, $lockVersion = null)
  * @method Client|null findOneBy(array $criteria, array $orderBy = null)
  * @method Client[]    findAll()
  * @method Client[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
@@ -19,6 +18,11 @@ class DbClientRepository extends ServiceEntityRepository implements ClientReposi
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Client::class);
+    }
+
+    public function findById(int $id): ?Client
+    {
+        return parent::find($id);
     }
 
     public function findByUserName(string $userName): ?Client

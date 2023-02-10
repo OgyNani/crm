@@ -8,6 +8,11 @@ class InMemoryClientRepository implements ClientRepository
 {
     private array $clients = [];
 
+    public function findById(int $id): ?Client
+    {
+        return $this->clients[$id] ?? null;
+    }
+
     public function findByUserName(string $userName): ?Client
     {
         return $this->clients[$userName] ?? null;
@@ -15,21 +20,11 @@ class InMemoryClientRepository implements ClientRepository
 
     public function save(Client $entity): void
     {
-        $this->clients[$entity->getUsername()] = $entity;
+        $this->clients[$entity->getId()] = $entity;
     }
 
     public function remove(Client $entity): void
     {
-        unset($this->clients[$entity->getUsername()]);
-    }
-
-    public function findByUser(int $userId): array
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.userId = :userId')
-            ->setParameter('userId', $userId)
-            ->orderBy('o.id', 'DESC')
-            ->getQuery()
-            ->getResult();
+        unset($this->clients[$entity->getId()]);
     }
 }

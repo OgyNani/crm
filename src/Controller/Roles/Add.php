@@ -14,8 +14,9 @@ class Add extends AbstractController
 {
     private RoleRepository $roleRepository;
 
-    public function __construct(RoleRepository $roleRepository)
-    {
+    public function __construct(
+        RoleRepository $roleRepository
+    ){
         $this->roleRepository = $roleRepository;
     }
 

@@ -6,8 +6,8 @@ use App\Entity\Client;
 
 interface ClientRepository
 {
+    public function findById(int $id): ?Client;
     public function findByUserName(string $userName): ?Client;
     public function save(Client $entity): void;
     public function remove(Client $entity): void;
-    public function findByUser(int $userId): array;
 }
