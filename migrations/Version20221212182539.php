@@ -27,6 +27,7 @@ final class Version20221212182539 extends AbstractMigration
             country VARCHAR(180) NOT NULL, 
             `sum` INT(255) NOT NULL,
             status VARCHAR(180) NOT NULL, 
+            created_at DATETIME NOT NULL DEFAULT NOW(),
             PRIMARY KEY(id)
         ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }

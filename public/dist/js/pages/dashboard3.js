@@ -77,9 +77,9 @@ $(function () {
     }
   })
 
-  var $visitorsChart = $('#visitors-chart')
+  var $countChart = $('#visitors-chart')
   // eslint-disable-next-line no-unused-vars
-  var visitorsChart = new Chart($visitorsChart, {
+  var countChart = new Chart($countChart, {
     data: {
       labels: ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
       datasets: [{

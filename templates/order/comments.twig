@@ -20,16 +20,16 @@
                             <h3 class="profile-username text-center">Client name</h3>
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
-                                    <b>Order ID</b> <a class="float-right"></a>
+                                    <b>Order ID</b> <span class="float-right">{{ order.id }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Order Status</b> <a class="float-right"></a>
+                                    <b>Order Status</b> <span class="float-right">{{ order.status }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Order Sum</b> <a class="float-right"> €</a>
+                                    <b>Order Sum</b> <span class="float-right"> €{{ order.sum }}</span>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Order Country</b> <a class="float-right"> </a>
+                                    <b>Order Country</b> <span class="float-right">{{ order.country }}</span>
                                 </li>
                             </ul>
                         </div>
