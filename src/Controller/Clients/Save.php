@@ -36,6 +36,8 @@ class Save extends AbstractController
         );
         $this->clientRepository->save($clients);
 
+//        $this->actionLogRepository->save(new ActionLog(5, $id, 'change client', ['username']));
+
         return $this->redirect("/client/{$id}/profile");
     }
 }

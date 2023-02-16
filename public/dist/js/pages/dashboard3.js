@@ -11,6 +11,15 @@ $(function () {
   var mode = 'index'
   var intersect = true
 
+  /*
+  var data = $.ajax({
+    type: "GET",
+    url: '/dashboard/orders-count',
+    success: function(){console.log('success')},
+    dataType: 'json'
+  });
+  */
+
   var $salesChart = $('#sales-chart')
   // eslint-disable-next-line no-unused-vars
   var salesChart = new Chart($salesChart, {
@@ -77,9 +86,9 @@ $(function () {
     }
   })
 
-  var $visitorsChart = $('#visitors-chart')
+  var $countChart = $('#count-chart')
   // eslint-disable-next-line no-unused-vars
-  var visitorsChart = new Chart($visitorsChart, {
+  var countChart = new Chart($countChart, {
     data: {
       labels: ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
       datasets: [{

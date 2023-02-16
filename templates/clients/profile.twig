@@ -68,6 +68,11 @@
                                            href="#edit"
                                            data-toggle="tab">Edit Client</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                           href="#comments"
+                                           data-toggle="tab">Comments</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="card-body">
@@ -113,6 +118,10 @@
                                                                     <a class="btn btn-default"
                                                                        href="/client/{{order.id}}/edit-order">
                                                                         <i class="fa fa-edit" ></i> Edit
+                                                                    </a>
+                                                                    <a class="btn btn-default"
+                                                                       href="/client/{{order.id}}/order-comments">
+                                                                        <i class="fa fa-box" ></i> Comments
                                                                     </a>
                                                                 </div>
                                                             </td>
@@ -171,6 +180,43 @@
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 </form>
+                                                </tbody>
+                                            </table>
+                                            <p>
+                                                <span class="float-right">
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="comments">
+                                        <div class="post">
+                                            <table class="table">
+                                                <tbody>
+                                                <div class="direct-chat-messages">
+                                                    {% for commentData in commentsData %}
+                                                    <div class="direct-chat-msg">
+                                                        <div class="direct-chat-infos clearfix">
+                                                            <span class="direct-chat-name float-left">{{ commentData.comment_creator }} </span>
+                                                            <span class="direct-chat-timestamp float-left pl-1">({{ commentData.creation_at|date('d M H:i') }})</span>
+                                                        </div>
+                                                        <div class="direct-chat-text">
+                                                            {{ commentData.text }}
+                                                        </div>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="card-footer">
+                                                    <form action="/client/{{ client.id }}/add-comment" method="post">
+                                                        <div class="input-group">
+                                                            <input type="hidden" name="clientId" value="{{ client.id }}">
+                                                            <input type="hidden" name="userId" value="{{ app.user.id }}">
+                                                            <input type="text" name="text" placeholder="Type Message ..." class="form-control">
+                                                            <span class="input-group-append">
+                                                                <button type="submit" class="btn btn-primary">Send</button>
+                                                            </span>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                                 </tbody>
                                             </table>
                                             <p>

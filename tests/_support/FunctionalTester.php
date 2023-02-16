@@ -20,6 +20,18 @@ class FunctionalTester extends \Codeception\Actor
 {
     use _generated\FunctionalTesterActions;
 
+
+    public function loginAsAdmin(): void
+    {
+        $this->amOnPage('/login');
+
+        $this->fillField('_username', 'qwe');
+        $this->fillField('_password', '123');
+
+        $this->click('Login');
+        $this->see('Logout', '#logout-link');
+    }
+
    /**
     * Define custom actions here
     */

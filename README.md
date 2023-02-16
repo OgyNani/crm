@@ -15,5 +15,12 @@ $ symfony serve:start
 ## Run migrations
 
 ```
-$ ./bin/console doctrine:migration:migrate
+$ ./bin/console doctrine:migration:migrate -n
 ```
+
+## Roadmap
+  
+ - [+] Create client_comments table (id, client_id, user_id, creation_at, text) ~4h
+ - [+] Create order_comments table (id,  order_id,  user_id, created_at, text) ~1h
+ - [ ] Create button Comments on client page (/client/{id}/profile) with template ~1d
+ - [ ] Create endpoint /client/{id}/add-comment ~1d

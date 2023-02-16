@@ -2,6 +2,7 @@
 
 namespace App\Controller\Clients;
 
+use App\Repository\ClientCommentsRepository;
 use App\Repository\ClientRepository;
 use App\Repository\CountriesRepository;
 use App\Repository\OrderRepository;
@@ -16,30 +17,36 @@ class Profile extends AbstractController
     private ClientRepository $clientRepository;
     private OrderRepository $orderRepository;
     private CountriesRepository $countriesRepository;
+    private ClientCommentsRepository $clientCommentsRepository;
 
-    public function __construct(ClientRepository $clientRepository, OrderRepository $orderRepository, CountriesRepository $countriesRepository)
+    public function __construct(ClientRepository $clientRepository,
+                                OrderRepository $orderRepository,
+                                CountriesRepository $countriesRepository,
+                                ClientCommentsRepository $clientCommentsRepository
+    )
     {
         $this->clientRepository = $clientRepository;
         $this->orderRepository = $orderRepository;
         $this->countriesRepository = $countriesRepository;
+        $this->clientCommentsRepository = $clientCommentsRepository;
     }
 
     #[IsPermissionGranted(resource: 'clients', access: 'view')]
     #[Route('/client/{id}/profile', name: 'client-profile')]
     public function do(int $id): Response
     {
-        $client = $this->clientRepository->find($id);
+        $client = $this->clientRepository->findById($id);
+
+        if ($client === null) {
+            throw new NotFoundHttpException("client #$id not found");
+        }
+
         $orders = $this->orderRepository->findByClient($id);
         $countries = $this->countriesRepository->findAll();
         $ordersCount = $this->orderRepository->countOrdersByClient($id);
         $productsSum = $this->orderRepository->sumProductsByClient($id);
         $totalSum = $this->orderRepository->sumSoldByClient($id);
-
-        if ($client === null) {
-            throw new NotFoundHttpException("client #$id not found");
-        } elseif ($orders === null) {
-            throw new NotFoundHttpException("orders #$id not found");
-        }
+        $commentsData = $this->clientCommentsRepository->findByClient($id);
 
         return $this->render('clients/profile.twig', [
             'client' => $client,
@@ -47,7 +54,8 @@ class Profile extends AbstractController
             'countries' => $countries,
             'ordersCount' => $ordersCount,
             'productsSum' => $productsSum,
-            'totalSum' => $totalSum
+            'totalSum' => $totalSum,
+            'commentsData' => $commentsData,
         ]);
     }
 }

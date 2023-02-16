@@ -10,14 +10,10 @@ class ClientCreateTest extends \Codeception\Test\Unit
 
     protected AcceptanceTester $tester;
 
-    protected function _before()
-    {
-    }
-
     // tests
     public function testSomeFeature()
     {
-//        $I->loginAsAdmin();
+        $this->tester->loginAsAdmin();
 
         $this->tester->amOnPage('/client/create');
 
@@ -25,7 +21,7 @@ class ClientCreateTest extends \Codeception\Test\Unit
 
         $this->tester->fillField('contact', 'Testing');
 
-        $this->tester->fillField('country', 'Country' . date('YmdHis'));
+        $this->tester->selectOption('country', 'Armenia');
 
         $this->tester->click('Submit');
         $this->tester->see('Testing');

@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -26,8 +31,115 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+            <!-- Search -->
             <li class="nav-item">
-                <a class="nav-link" href="/logout" role="button">
+                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <i class="fas fa-search"></i>
+                </a>
+                <div class="navbar-search-block">
+                    <form class="form-inline">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <!-- Private Chat -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="far fa-comments"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                    <a href="#" class="dropdown-item">
+
+                        <div class="media">
+                            <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Brad Diesel
+                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">Call me whenever you can...</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+
+                        <div class="media">
+                            <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    John Pierce
+                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">I got your message bro</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+
+                        <div class="media">
+                            <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    Nora Silvester
+                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
+                                </h3>
+                                <p class="text-sm">The subject goes here</p>
+                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                </div>
+            </li>
+            <!-- Notification -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">15</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+                    <span class="dropdown-item dropdown-header">15 Notifications</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> 4 new messages
+                        <span class="float-right text-muted text-sm">3 mins</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> 8 friend requests
+                        <span class="float-right text-muted text-sm">12 hours</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-file mr-2"></i> 3 new reports
+                        <span class="float-right text-muted text-sm">2 days</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+            </li>
+            <!-- Logout -->
+            <li class="nav-item">
+                <a id="logout-link" class="nav-link" href="/logout" role="button">
                     Logout <i class="fas fa-sign-out-alt"></i>
                 </a>
             </li>
@@ -61,23 +173,33 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
+                        <a href="/dashboard" class="nav-link">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    {% if is_granted('users', 'manage') %}
+                    <li class="nav-item">
                         <a href="/user/list" class="nav-link">
                             <i class="nav-icon fas fa-user-secret"></i>
                             <p>Users</p>
                         </a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a href="/clients/list" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Clients</p>
                         </a>
                     </li>
+                    {% if is_granted('roles', 'view') %}
                     <li class="nav-item">
                         <a href="/roles/list" class="nav-link">
                             <i class="nav-icon fas fa-users-cog"></i>
                             <p>Roles</p>
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -107,9 +229,19 @@
 
 <!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
+
+<script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+
+<script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+<script src="../../plugins/chart.js/Chart.min.js"></script>
+
+{% block inline_scripts %}{% endblock %}
 </body>
 </html>

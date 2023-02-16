@@ -14,8 +14,10 @@ class ClientsList extends AbstractController
     private Security $security;
     private ClientRepository $clientRepository;
 
-    public function __construct(Security $security, ClientRepository $clientRepository)
-    {
+    public function __construct(
+        Security $security,
+        ClientRepository $clientRepository
+    ){
         $this->security = $security;
         $this->clientRepository = $clientRepository;
     }
@@ -25,6 +27,10 @@ class ClientsList extends AbstractController
     public function do(): Response
     {
         $clients = $this->clientRepository->findBy(['userId' => $this->security->getUser()->getId()]);
-        return $this->render('clients/list.twig', ['clients' => $clients]);
+        return $this->render(
+            'clients/list.twig',
+            [
+                'clients' => $clients
+            ]);
     }
 }

@@ -10,18 +10,16 @@ class UserCreateTest extends \Codeception\Test\Unit
 
     protected AcceptanceTester $tester;
 
-    protected function _before()
-    {
-    }
-
     // tests
     public function testSomeFeature()
     {
-//        $I->loginAsAdmin();
+        $this->tester->loginAsAdmin();
 
         $this->tester->amOnPage('/user/create');
 
         $this->tester->fillField('userName', "User-" . date("YmdHis"));
+
+        $this->tester->selectOption('roleId', '1');
 
         $this->tester->fillField('password', 'PW' . date('YmdHis'));
 

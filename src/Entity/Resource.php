@@ -20,9 +20,10 @@ class Resource
     #[ORM\Column(name:'available_accesses', length: 180, unique: true)]
     private string $availableAccess;
 
-    public function __construct(string $name)
+    public function __construct(string $name, string $availableAccess)
     {
         $this->name = $name;
+        $this->availableAccess = $availableAccess;
     }
 
     public function getId(): int
@@ -33,5 +34,10 @@ class Resource
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getAvailableAccess(): array
+    {
+        return explode(',', $this->availableAccess);
     }
 }

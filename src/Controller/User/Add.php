@@ -4,6 +4,7 @@ namespace App\Controller\User;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Security\IsPermissionGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,16 +27,17 @@ class Add extends AbstractController
     public function do(Request $request): Response
     {
         $password = $this->passwordHasher->hashPassword(
-            new User('a', 2),
+            new User('a', 2, 2),
             $request->request->get('password')
         );
 
         $user = new User(
             $request->request->get('userName'),
+            $request->request->get('roleId'),
             $password
         );
 
-        $this->userRepository->save($user, true);
+        $this->userRepository->save($user);
 
         return $this->redirect('/user/list');
     }

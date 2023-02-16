@@ -7,9 +7,6 @@
                 <div class="col-sm-6">
                     <h1>Roles</h1>
                 </div>
-                <div class="col-sm-6 clearfix">
-                    <a href="/role/create" class="btn btn-block btn-default">Create role</a>
-                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -18,55 +15,46 @@
     <section class="content">
 
         <!-- Default box -->
-        <div class="card">
-            <div class="card-body p-0">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th class="col-1">#</th>
-                        <th class="col-3">Name</th>
-                        <th class="col-3">Tag</th>
-                        <th class="col-2">Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for role in roles %}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td class="pl-4">{{ role.id }}</td>
-                            <td>
-                                <h5 class="font-medium mb-0">{{ role.name }}</h5>
-                            </td>
-                            <td>
-                                <h5 class="font-medium mb-0">{{ role.role }}</h5>
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <a class="btn btn-default" href="/role/{{ role.id }}/edit">
-                                        <i class="fa fa-user" ></i> Edit
-                                    </a>
-                                    <a class="btn btn-default" href="/role/{{ role.id }}/delete">
-                                        <i class="fas fa-trash"></i> Remove
-                                    </a>
-                                </div>
-                            </td>
+                            <th class="col-1">#</th>
+                            <th class="col-3">Name</th>
+                            <th class="col-3">Tag</th>
+                            <th class="col-2">Actions</th>
                         </tr>
-                    {% endfor %}
-
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for role in roles %}
+                            <tr>
+                                <td class="pl-4">{{ role.id }}</td>
+                                <td>
+                                    <h5 class="font-medium mb-0">{{ role.name }}</h5>
+                                </td>
+                                <td>
+                                    <h5 class="font-medium mb-0">{{ role.role }}</h5>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" href="/role/{{ role.id }}/edit">
+                                            <i class="fa fa-user" ></i> Edit
+                                        </a>
+                                        <a class="btn btn-default" href="/role/{{ role.id }}/delete">
+                                            <i class="fas fa-trash"></i> Remove
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer clearfix">
-                <ul class="pagination pagination m-0 float-right">
-                    <li class="page-item"><a class="page-link" href="#">«</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">»</a></li>
-                </ul>
-            </div>
-            <!-- /.card-footer-->
         </div>
+
         <!-- /.card -->
 
     </section>

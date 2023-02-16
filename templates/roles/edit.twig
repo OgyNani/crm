@@ -1,40 +1,126 @@
 {% extends "layout.twig" %}
 {% block body %}
-    <div class="col-md-12">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Edit role</h3>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Edit role</h1>
+                </div>
             </div>
-            <form action="/role/{{ role.id }}/save" method="post">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label>Role Name</label>
-                            <input name="name"
-                                   type="text"
-                                   class="form-control"
-                                   value="{{ role.name }}"
-                                   id="exampleInputEmail1"
-                                   placeholder="Role Name">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Role Tag</label>
-                            <input name="role"
-                                   type="text"
-                                   class="form-control"
-                                   value="{{ role.role }}"
-                                   id="exampleInputEmail1"
-                                   placeholder="Role Tag">
-                    </div>
-                </div>
-
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="/roles/list" class="btn btn-default">Cancel</a>
-                </div>
-            </form>
         </div>
-    </div>
+    </section>
 
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                     <div class="card">
+            <div class="card-header">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active"
+                           href="#edit-role"
+                           data-toggle="tab">Edit Role</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="#permissions"
+                           data-toggle="tab">Permissions</a>
+                    </li>
+                </ul>
+            </div>
+             <div class="tab-content">
+                <div class="tab-pane active" id="edit-role">
+                    <form action="/role/{{ role.id }}/save" method="post">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>Role Name</label>
+                                    <input name="name"
+                                           type="text"
+                                           class="form-control"
+                                           value="{{ role.name }}"
+                                           id="exampleInputEmail1"
+                                           placeholder="Role Name">
+                            </div>
 
+                            <div class="form-group">
+                                <label>Role Tag</label>
+                                    <input name="role"
+                                           type="text"
+                                           class="form-control"
+                                           value="{{ role.role }}"
+                                           id="exampleInputEmail1"
+                                           placeholder="Role Tag">
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="/roles/list" class="btn btn-default">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="permissions">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="col-1">#</th>
+                            <th class="col-3">Name</th>
+                            <th class="col-3">Access</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for resource in resources %}
+                            <tr>
+                                <td>
+                                    {{ resource.id }}
+                                </td>
+                                <td>
+                                    {{ resource.name }}
+                                </td>
+                                <td>
+                                    <div class="row">
+                                    {% for access in resource.availableAccess %}
+                                        <div class="col-md">
+                                            {% if permissions[resource.id][access] is defined %}
+                                                <input type="checkbox" autocomplete="off" checked value="1" class="form-check-input" id="chbx_{{ resource.id }}_{{ access }}" onchange="updatePermissionCheckbox({{ role.id }}, {{ resource.id }}, '{{ access }}')"/>
+                                            {% else %}
+                                                <input type="checkbox" autocomplete="off" value="0sa" class="form-check-input" id="chbx_{{ resource.id }}_{{ access }}" onchange="updatePermissionCheckbox({{ role.id }}, {{ resource.id }}, '{{ access }}')"/>
+                                            {% endif %}
+                                            <label class="form-check-label" for="chbx_{{ resource.id }}_{{ access }}">{{ access }}</label>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+        </div>
+    </section>
+
+    <script>
+       function updatePermissionCheckbox(roleId, resourceId, access) {
+           var Toast = Swal.mixin({
+               toast: true,
+               position: 'top-end',
+               showConfirmButton: false,
+               timer: 3000
+           });
+           $.ajax({
+               type: "POST",
+               url: '/role/'+roleId+'/save-permission',
+               data: {"resourceId": resourceId, "access": access},
+               success: function(){console.log('success')},
+               dataType: 'json'
+           });
+           Toast.fire({
+               icon: 'success',
+               title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+           })
+       }
+    </script>
 {% endblock %}

@@ -10,16 +10,14 @@ class UserEditTest extends \Codeception\Test\Unit
 
     protected AcceptanceTester $tester;
 
-    protected function _before()
-    {
-    }
-
     // tests
     public function testSomeFeature()
     {
-//        $I->loginAsAdmin();
+        $this->tester->loginAsAdmin();
 
-        $this->tester->amOnPage('/user/3/edit');
+        $this->tester->amOnPage('/user/16/profile');
+
+        $this->tester->click('#edit');
 
         $this->tester->fillField('userName', "EditUser-" . date("YmdHis"));
 
