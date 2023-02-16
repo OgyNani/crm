@@ -27,4 +27,19 @@ class InMemoryClientRepository implements ClientRepository
     {
         unset($this->clients[$entity->getId()]);
     }
+
+    public function findByUser(int $user_id)
+    {
+        // TODO: Implement findByUser() method.
+    }
+
+    public function totalByUser(int $user_id)
+    {
+        // TODO: Implement totalByUser() method.
+    }
+
+    public function totalUsers(int $user_id)
+    {
+        // TODO: Implement totalUsers() method.
+    }
 }

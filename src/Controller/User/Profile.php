@@ -38,6 +38,7 @@ class Profile extends AbstractController
         $role = $this->roleRepository->find($user->getRoleId());
         $roles = $this->roleRepository->findAll();
         $clientsData = $this->clientRepository->findByUser($id);
+        $totalByUsers = $this->clientRepository->totalByUser($id);
 
         return $this->render(
             'user/profile.twig',
@@ -46,6 +47,7 @@ class Profile extends AbstractController
                 'role' => $role,
                 'roles' => $roles,
                 'clientsData' => $clientsData,
+                'totalByUsers' => $totalByUsers
             ]
         );
     }

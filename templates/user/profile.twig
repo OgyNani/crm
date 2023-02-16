@@ -24,15 +24,17 @@
                                 <li class="list-group-item">
                                     <b>Role</b> <a class="float-right">{{ role.name }}</a>
                                 </li>
-                                <li class="list-group-item">
-                                    <b>Orders Quantity</b> <a class="float-right">1,322</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Total orders sum</b> <a class="float-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Total Products Sold</b> <a class="float-right">13,287</a>
-                                </li>
+                                {% for totalByUser in totalByUsers %}
+                                    <li class="list-group-item">
+                                        <b>Orders Quantity</b> <a class="float-right">{{ totalByUser.orders_count }}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Total orders sum</b> <a class="float-right">{{ totalByUser.orders_sum }}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Total Products Sold</b> <a class="float-right">{{ totalByUser.products_sum }}</a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
